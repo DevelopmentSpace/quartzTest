@@ -13,11 +13,10 @@ namespace QuartzTest
     {
         public void Execute(IJobExecutionContext context)
         {
-            string attr = (string)context.JobDetail.JobDataMap.Get("attr");
+            int newIndex = (int)context.Trigger.JobDataMap.Get("newIndex");
 
-            attr = attr + "B";
-            context.JobDetail.JobDataMap.Add(new KeyValuePair<string, object>("attr", attr));
-            Console.WriteLine(attr);
+            context.Trigger.JobDataMap.Put("newIndex", newIndex*100);
+            context.Trigger.JobDataMap.Put("updDisp",true);
         }
     }
 }
